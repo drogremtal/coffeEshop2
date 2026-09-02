@@ -1,0 +1,271 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Karla", "Trebuchet MS", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --color-bark-950: #140d09;
+  --color-bark-900: #1b120c;
+  --color-bark-800: #241811;
+  --color-bark-700: #2e1f15;
+  --color-bark-600: #3a291c;
+  --color-bark-500: #4c3626;
+
+  --color-cream-100: #f5ebd9;
+  --color-cream-300: #e4d3b8;
+  --color-cream-500: #c9b190;
+
+  --color-faint: #93795c;
+
+  --color-caramel-300: #ecc27e;
+  --color-caramel-400: #dfa95c;
+  --color-caramel-500: #d18f3f;
+  --color-caramel-600: #b87430;
+
+  --color-copper-500: #be5b2e;
+  --color-copper-600: #a44a24;
+
+  --color-moss-300: #b4c294;
+  --color-moss-400: #a3b183;
+  --color-moss-500: #7e8f60;
+
+  --color-line: #3b2a1d;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bark-950);
+    color: var(--color-cream-100);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: var(--color-caramel-500);
+    color: var(--color-bark-950);
+  }
+}
+
+/* ---------- ambient texture ---------- */
+.noise-layer {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.06;
+}
+
+.bean-field {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23dfa95c' stroke-width='1.4' opacity='0.55'%3E%3Cellipse cx='28' cy='30' rx='8' ry='11' transform='rotate(24 28 30)'/%3E%3Cpath d='M24 20c6 5 6 14 0 20' transform='rotate(24 28 30)'/%3E%3Cellipse cx='88' cy='84' rx='8' ry='11' transform='rotate(-18 88 84)'/%3E%3Cpath d='M84 74c6 5 6 14 0 20' transform='rotate(-18 88 84)'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 120px 120px;
+}
+
+/* ---------- scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.75s ease,
+    transform 0.75s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- keyframes ---------- */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 34s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes spin360 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.stamp-spin {
+  animation: spin360 26s linear infinite;
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-11px);
+  }
+}
+.float-soft {
+  animation: floaty 7s ease-in-out infinite;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.4);
+  }
+  60% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.anim-pop {
+  animation: pop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 18px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+.toast-in {
+  animation: toastIn 0.32s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise-in {
+  animation: riseIn 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes drawerIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+.drawer-in {
+  animation: drawerIn 0.42s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in {
+  animation: fadeIn 0.3s ease both;
+}
+
+@keyframes steamRise {
+  0% {
+    transform: translateY(3px);
+    opacity: 0;
+  }
+  35% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-5px);
+    opacity: 0;
+  }
+}
+.steam {
+  animation: steamRise 2.8s ease-in-out infinite;
+  opacity: 0;
+}
+.steam.s2 {
+  animation-delay: 0.9s;
+}
+.steam.s3 {
+  animation-delay: 1.7s;
+}
+
+@keyframes drawPath {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.draw-path {
+  stroke-dasharray: 620;
+  stroke-dashoffset: 620;
+}
+.is-in .draw-path {
+  animation: drawPath 2.2s 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.glow-pulse {
+  animation: glowPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes loaderSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.loader-spin {
+  animation: loaderSpin 0.9s linear infinite;
+}
+
+/* ---------- scrollbars ---------- */
+.nice-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.nice-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.nice-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-bark-500);
+  border-radius: 99px;
+}
+.nice-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--color-faint);
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .stamp-spin,
+  .float-soft,
+  .steam,
+  .glow-pulse,
+  .anim-pop {
+    animation: none !important;
+  }
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+  .draw-path {
+    stroke-dashoffset: 0;
+  }
+}
