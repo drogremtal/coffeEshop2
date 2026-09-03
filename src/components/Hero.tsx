@@ -8,10 +8,10 @@ interface HeroProps {
 }
 
 const STATS = [
-  { value: "06", label: "lots on the shelf" },
-  { value: "26", label: "farm partners" },
-  { value: "48h", label: "roast-to-ship window" },
-  { value: "86+", label: "cupping score floor" },
+  { value: "06", label: "лотов на полке" },
+  { value: "26", label: "ферм-партнёров" },
+  { value: "48 ч", label: "от обжарки до отправки" },
+  { value: "86+", label: "нижний балл каппинга" },
 ];
 
 export default function Hero({ onShop, onRoastScale }: HeroProps) {
@@ -39,20 +39,20 @@ export default function Hero({ onShop, onRoastScale }: HeroProps) {
           <div ref={leftRef} className="reveal lg:col-span-7 lg:pr-6">
             <p className="flex items-center gap-4 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.32em] text-caramel-400">
               <span className="h-px w-10 bg-caramel-500/70" />
-              Small-batch roastery — Portland, OR — est. 2017
+              Крафтовая обжарка · малые партии · с 2017 года
             </p>
 
-            <h1 className="mt-6 font-display font-semibold text-[2.7rem] leading-[1.02] sm:text-6xl xl:text-[4.6rem] tracking-[-0.02em] text-cream-100">
-              Beans with a{" "}
-              <em className="text-caramel-400 font-light italic">birthplace</em>,
-              <br className="hidden sm:block" /> roasted over oak{" "}
-              <em className="font-light italic text-cream-300">ember</em>.
+            <h1 className="mt-6 font-display font-semibold text-[2.7rem] leading-[1.05] sm:text-6xl xl:text-[4.4rem] tracking-[-0.02em] text-cream-100">
+              Зерно, у которого есть{" "}
+              <em className="text-caramel-400 font-light italic">родной дом</em>, —
+              <br className="hidden sm:block" /> обжаренное на дубовом{" "}
+              <em className="font-light italic text-cream-300">угле</em>.
             </h1>
 
             <p className="mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-cream-300">
-              Six single lots on the shelf this week — cupped at 86 or better,
-              roasted to order, and out the door within 48 hours of leaving the
-              drum. No warehouse bags, no mystery blends.
+              Шесть монолотов на полке на этой неделе: каппинг от 86 баллов,
+              обжарка под заказ и отправка в течение 48 часов после барабана.
+              Никаких складских пакетов и безымянных смесей.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -60,14 +60,14 @@ export default function Hero({ onShop, onRoastScale }: HeroProps) {
                 onClick={onShop}
                 className="group flex items-center gap-3 bg-caramel-400 hover:bg-caramel-300 text-bark-950 font-bold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-full transition-all active:scale-95 shadow-[0_10px_30px_-12px_rgba(209,143,63,0.55)]"
               >
-                Browse the shelf
+                Смотреть витрину
                 <ArrowIcon className="w-4.5 h-4.5 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
               <button
                 onClick={onRoastScale}
                 className="font-mono text-[11px] sm:text-xs uppercase tracking-[0.22em] text-cream-300 hover:text-caramel-300 border-b border-bark-500 hover:border-caramel-500 pb-1 transition-colors"
               >
-                How we roast ↓
+                Как мы обжариваем ↓
               </button>
             </div>
 
@@ -91,13 +91,13 @@ export default function Hero({ onShop, onRoastScale }: HeroProps) {
               </svg>
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-faint">
-                  Lot №41 — Dawn Patrol · roast profile
+                  Лот №41 — «Утренний дозор» · профиль обжарки
                 </p>
                 <p className="mt-1.5 font-mono text-xs sm:text-[13px] text-cream-300">
-                  Charge 180° <span className="text-faint">→</span> turning point 1:48{" "}
+                  Засыпка 180° <span className="text-faint">→</span> точка разворота 1:48{" "}
                   <span className="text-faint">→</span>{" "}
-                  <span className="text-copper-500">first crack 8:12</span>{" "}
-                  <span className="text-faint">→</span> drop 204° at 9:42
+                  <span className="text-copper-500">первый крэк 8:12</span>{" "}
+                  <span className="text-faint">→</span> выгрузка 204° на 9:42
                 </p>
               </div>
             </div>
@@ -128,7 +128,7 @@ export default function Hero({ onShop, onRoastScale }: HeroProps) {
               <div className="rounded-t-full border border-line overflow-hidden shadow-[0_40px_80px_-40px_rgba(0,0,0,0.9)]">
                 <img
                   src={HERO_IMAGE}
-                  alt="Slow pour from a gooseneck kettle into a ceramic dripper"
+                  alt="Медленный пуровер: вода из чайника с гусиной шеей льётся в керамическую воронку"
                   className="w-full aspect-[3/4.1] object-cover transition-transform duration-[1400ms] hover:scale-[1.045]"
                 />
               </div>
@@ -140,9 +140,9 @@ export default function Hero({ onShop, onRoastScale }: HeroProps) {
                     <path id="stampCircle" d="M 60,60 m -46,0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0" />
                   </defs>
                   <circle cx="60" cy="60" r="57" fill="rgba(20,13,9,0.88)" stroke="currentColor" strokeOpacity="0.35" />
-                  <text fontSize="9.2" letterSpacing="2.6" fill="currentColor" fontFamily="IBM Plex Mono, monospace">
+                  <text fontSize="8.8" letterSpacing="2.1" fill="currentColor" fontFamily="IBM Plex Mono, monospace">
                     <textPath href="#stampCircle">
-                      ROASTED WEEKLY · SMALL BATCH · EST. 2017 ·
+                      МАЛЫЕ ПАРТИИ · ОБЖАРКА ЕЖЕНЕДЕЛЬНО · С 2017 ·
                     </textPath>
                   </text>
                 </svg>
@@ -154,10 +154,10 @@ export default function Hero({ onShop, onRoastScale }: HeroProps) {
               {/* floating spec card */}
               <div className="float-soft absolute top-10 -right-2 sm:-right-6 bg-bark-800 border border-line rounded-lg px-4 py-3 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.85)]">
                 <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-faint">
-                  Lot №41 — Dawn Patrol
+                  Лот №41 — «Утренний дозор»
                 </p>
                 <p className="mt-1 flex items-center gap-1.5 font-display text-2xl font-semibold text-cream-100">
-                  92 <span className="text-sm text-faint font-body">pts</span>
+                  92 <span className="text-sm text-faint font-body">балла</span>
                   <StarIcon className="w-4 h-4 text-caramel-400" />
                 </p>
               </div>

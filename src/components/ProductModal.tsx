@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { CATEGORY_LABELS, formatPrice, type Product } from "../data/products";
+import {
+  CATEGORY_LABELS,
+  formatPrice,
+  pluralRu,
+  type Product,
+} from "../data/products";
 import {
   GrindIcon,
   MinusIcon,
@@ -28,30 +33,36 @@ export default function ProductModal({ product, onClose, onAdd }: ProductModalPr
   }, [onClose]);
 
   const specs: { label: string; value: string }[] = [
-    { label: "Process", value: product.process },
-    { label: "Varietal", value: product.varietal },
-    { label: "Altitude", value: product.altitude },
-    { label: "Cupping score", value: `${product.score} / 100` },
+    { label: "Лот", value: product.lot },
+    { label: "Обработка", value: product.process },
+    { label: "Разновидность", value: product.varietal },
+    { label: "Высота", value: product.altitude },
+    { label: "Оценка каппинга", value: `${product.score} / 100` },
   ];
 
   const brew = [
-    { icon: <ScaleIcon className="w-4.5 h-4.5" />, label: "Ratio", value: product.brew.ratio },
-    { icon: <ThermoIcon className="w-4.5 h-4.5" />, label: "Water", value: product.brew.temp },
-    { icon: <TimerIcon className="w-4.5 h-4.5" />, label: "Time", value: product.brew.time },
-    { icon: <GrindIcon className="w-4.5 h-4.5" />, label: "Grind", value: product.brew.grind },
+    { icon: <ScaleIcon className="w-4.5 h-4.5" />, label: "Пропорция", value: product.brew.ratio },
+    { icon: <ThermoIcon className="w-4.5 h-4.5" />, label: "Вода", value: product.brew.temp },
+    { icon: <TimerIcon className="w-4.5 h-4.5" />, label: "Время", value: product.brew.time },
+    { icon: <GrindIcon className="w-4.5 h-4.5" />, label: "Помол", value: product.brew.grind },
   ];
 
   const lowStock = product.stock <= 10;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true" aria-label={`${product.name} details`}>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`«${product.name}» — подробнее`}
+    >
       <div className="absolute inset-0 bg-bark-950/85 fade-in" onClick={onClose} />
 
       <div className="rise-in relative w-full max-w-4xl max-h-[92vh] overflow-hidden rounded-xl border border-line bg-bark-800 shadow-[0_50px_120px_-40px_rgba(0,0,0,0.95)] grid md:grid-cols-[42%_1fr]">
         <button
           onClick={onClose}
           className="absolute top-3.5 right-3.5 z-10 bg-bark-950/80 border border-line rounded-full p-2 text-cream-300 hover:text-cream-100 hover:border-caramel-500 hover:rotate-90 transition-all duration-300"
-          aria-label="Close details"
+          aria-label="Закрыть"
         >
           <XIcon className="w-4 h-4" />
         </button>
@@ -60,7 +71,7 @@ export default function ProductModal({ product, onClose, onAdd }: ProductModalPr
         <div className="relative h-56 md:h-auto overflow-hidden border-b md:border-b-0 md:border-r border-line">
           <img
             src={product.image}
-            alt={`${product.name} coffee bag`}
+            alt={`Пакет кофе «${product.name}»`}
             className="h-full w-full object-cover object-[50%_18%]"
           />
           <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-bark-950/90 to-transparent" />
@@ -72,7 +83,7 @@ export default function ProductModal({ product, onClose, onAdd }: ProductModalPr
               {CATEGORY_LABELS[product.category]}
             </p>
             <p className="font-mono text-[11px] font-semibold bg-caramel-400 text-bark-950 px-2 py-1 rounded-sm">
-              {product.score} PTS
+              {product.score} БАЛЛОВ
             </p>
           </div>
         </div>
@@ -102,7 +113,7 @@ export default function ProductModal({ product, onClose, onAdd }: ProductModalPr
             {/* roast meter */}
             <div className="flex items-center gap-3 pt-1">
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-faint shrink-0">
-                Roast
+                Обжарка
               </span>
               <span className="flex-1 border-b border-dotted border-bark-500" />
               <span className="flex items-center gap-2.5">
@@ -137,7 +148,7 @@ export default function ProductModal({ product, onClose, onAdd }: ProductModalPr
           {/* brew guide */}
           <div className="mt-6 border border-line rounded-lg bg-bark-900/70 p-4 sm:p-5">
             <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-caramel-400">
-              Brew guide — {product.brew.method}
+              Как заваривать — {product.brew.method}
             </p>
             <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
               {brew.map((b) => (
@@ -161,11 +172,12 @@ export default function ProductModal({ product, onClose, onAdd }: ProductModalPr
             />
             {lowStock ? (
               <span className="text-caramel-300 font-semibold">
-                Only {product.stock} bags left this cycle — nearly gone.
+                Осталось всего {product.stock}{" "}
+                {pluralRu(product.stock, "пакет", "пакета", "пакетов")} — почти разобрали.
               </span>
             ) : (
               <span className="text-cream-300">
-                In stock · roasted to order, ships within 48 hours.
+                В наличии · обжарим под заказ, отправим за 48 часов.
               </span>
             )}
           </p>
@@ -177,7 +189,7 @@ export default function ProductModal({ product, onClose, onAdd }: ProductModalPr
                 onClick={() => setQty((q) => Math.max(1, q - 1))}
                 className="w-9 h-9 rounded-full flex items-center justify-center text-cream-300 hover:bg-bark-600 hover:text-cream-100 transition-colors active:scale-90 disabled:opacity-30"
                 disabled={qty <= 1}
-                aria-label="Decrease quantity"
+                aria-label="Уменьшить количество"
               >
                 <MinusIcon className="w-4 h-4" />
               </button>
@@ -187,7 +199,7 @@ export default function ProductModal({ product, onClose, onAdd }: ProductModalPr
               <button
                 onClick={() => setQty((q) => Math.min(12, q + 1))}
                 className="w-9 h-9 rounded-full flex items-center justify-center text-cream-300 hover:bg-bark-600 hover:text-cream-100 transition-colors active:scale-90"
-                aria-label="Increase quantity"
+                aria-label="Увеличить количество"
               >
                 <PlusIcon className="w-4 h-4" />
               </button>
@@ -197,7 +209,7 @@ export default function ProductModal({ product, onClose, onAdd }: ProductModalPr
               onClick={() => onAdd(product, qty)}
               className="flex-1 flex items-center justify-center gap-3 bg-caramel-400 hover:bg-caramel-300 text-bark-950 font-bold text-sm sm:text-[15px] px-6 py-3.5 rounded-full transition-all active:scale-[0.97] shadow-[0_12px_30px_-12px_rgba(209,143,63,0.6)]"
             >
-              Add {qty > 1 ? `${qty} ` : ""}to bag
+              В корзину{qty > 1 ? ` · ${qty} шт.` : ""}
               <span className="font-mono font-semibold">
                 · {formatPrice(product.price * qty)}
               </span>

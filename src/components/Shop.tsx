@@ -1,4 +1,4 @@
-import { CATEGORY_LABELS, type Category, type Product } from "../data/products";
+import { CATEGORY_LABELS, pluralRu, type Category, type Product } from "../data/products";
 import { useReveal } from "../hooks/useReveal";
 import ProductCard from "./ProductCard";
 import { BeanIcon, SearchIcon, XIcon } from "./icons";
@@ -20,11 +20,11 @@ interface ShopProps {
 }
 
 const SORTS: { key: SortKey; label: string }[] = [
-  { key: "featured", label: "Featured" },
-  { key: "price-asc", label: "Price · low to high" },
-  { key: "price-desc", label: "Price · high to low" },
-  { key: "roast-asc", label: "Roast · light first" },
-  { key: "roast-desc", label: "Roast · dark first" },
+  { key: "featured", label: "По оценке каппинга" },
+  { key: "price-asc", label: "Цена · сначала дешевле" },
+  { key: "price-desc", label: "Цена · сначала дороже" },
+  { key: "roast-asc", label: "Обжарка · от светлой" },
+  { key: "roast-desc", label: "Обжарка · от тёмной" },
 ];
 
 export default function Shop({
@@ -59,14 +59,15 @@ export default function Shop({
           <div>
             <p className="flex items-center gap-4 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.32em] text-caramel-400">
               <span className="h-px w-10 bg-caramel-500/70" />
-              The shelf — spring cycle
+              Витрина — весенний цикл
             </p>
             <h2 className="mt-4 font-display font-semibold text-4xl sm:text-5xl md:text-6xl tracking-[-0.02em] text-cream-100">
-              This week's <em className="italic font-light text-caramel-400">roasts</em>.
+              Свежая <em className="italic font-light text-caramel-400">обжарка</em> недели.
             </h2>
           </div>
           <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-faint pb-2">
-            Showing {String(items.length).padStart(2, "0")} / {String(total).padStart(2, "0")} bags
+            Показано {String(items.length).padStart(2, "0")} / {String(total).padStart(2, "0")}{" "}
+            {pluralRu(items.length, "пакет", "пакета", "пакетов")}
           </p>
         </div>
 
@@ -83,15 +84,15 @@ export default function Shop({
                 type="text"
                 value={search}
                 onChange={(e) => onSearch(e.target.value)}
-                placeholder="Search beans, origins, tasting notes…"
+                placeholder="Поиск: зерно, страна, вкусовые ноты…"
                 className="w-full bg-bark-800 border border-line rounded-lg pl-10 pr-10 py-3 text-sm text-cream-100 placeholder:text-faint focus:outline-none focus:border-caramel-500 focus:ring-1 focus:ring-caramel-500/40 transition-all"
-                aria-label="Search products"
+                aria-label="Поиск по товарам"
               />
               {search && (
                 <button
                   onClick={() => onSearch("")}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-faint hover:text-cream-100 transition-colors"
-                  aria-label="Clear search"
+                  aria-label="Очистить поиск"
                 >
                   <XIcon className="w-4 h-4" />
                 </button>
@@ -99,12 +100,12 @@ export default function Shop({
             </div>
 
             {/* sort */}
-            <div className="relative md:w-60">
+            <div className="relative md:w-64">
               <select
                 value={sort}
                 onChange={(e) => onSort(e.target.value as SortKey)}
                 className="w-full appearance-none bg-bark-800 border border-line rounded-lg px-4 py-3 pr-10 font-mono text-[11px] uppercase tracking-[0.14em] text-cream-300 focus:outline-none focus:border-caramel-500 transition-colors cursor-pointer"
-                aria-label="Sort products"
+                aria-label="Сортировка"
               >
                 {SORTS.map((s) => (
                   <option key={s.key} value={s.key} className="bg-bark-800">
@@ -126,7 +127,7 @@ export default function Shop({
           </div>
 
           {/* category chips */}
-          <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
+          <div className="flex flex-wrap gap-2" role="group" aria-label="Фильтр по категории">
             {categories.map((c) => {
               const active = category === c;
               return (
@@ -140,7 +141,7 @@ export default function Shop({
                   }`}
                   aria-pressed={active}
                 >
-                  {c === "all" ? "All beans" : CATEGORY_LABELS[c]}
+                  {c === "all" ? "Всё зерно" : CATEGORY_LABELS[c]}
                 </button>
               );
             })}
@@ -158,19 +159,19 @@ export default function Shop({
           <div className="mt-10 border border-dashed border-bark-500 rounded-xl py-20 px-6 text-center">
             <BeanIcon className="w-12 h-12 mx-auto text-bark-500" strokeWidth={1.2} />
             <h3 className="mt-5 font-display text-2xl font-semibold text-cream-100">
-              Nothing in the hopper
+              В воронке пусто
             </h3>
             <p className="mt-2 text-sm text-cream-300 max-w-sm mx-auto">
-              No beans match “{search || CATEGORY_LABELS[category as Category]}”. Try a
-              tasting note like <span className="text-caramel-300">honey</span> or clear
-              your filters.
+              По запросу «{search || CATEGORY_LABELS[category as Category]}» ничего не
+              нашлось. Попробуйте ноту вроде{" "}
+              <span className="text-caramel-300">мёд</span> или сбросьте фильтры.
             </p>
             <button
               onClick={onReset}
               className="mt-6 inline-flex items-center gap-2 border border-caramel-500 text-caramel-300 hover:bg-caramel-400 hover:text-bark-950 font-mono text-[11px] uppercase tracking-[0.2em] px-5 py-2.5 rounded-full transition-all active:scale-95"
             >
               <XIcon className="w-3.5 h-3.5" />
-              Clear search &amp; filters
+              Сбросить поиск и фильтры
             </button>
           </div>
         )}

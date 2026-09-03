@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { pluralRu } from "../data/products";
 import { BagIcon, CupIcon, XIcon } from "./icons";
 
 interface HeaderProps {
@@ -8,9 +9,9 @@ interface HeaderProps {
 }
 
 const NAV = [
-  { label: "The Shelf", id: "shop" },
-  { label: "Roast Scale", id: "roast-scale" },
-  { label: "Visit", id: "visit" },
+  { label: "Витрина", id: "shop" },
+  { label: "Шкала обжарки", id: "roast-scale" },
+  { label: "К нам", id: "visit" },
 ];
 
 export default function Header({ cartCount, onCartOpen, onNavigate }: HeaderProps) {
@@ -29,17 +30,17 @@ export default function Header({ cartCount, onCartOpen, onNavigate }: HeaderProp
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="flex items-center gap-3 group"
-            aria-label="Back to top"
+            aria-label="Наверх"
           >
             <span className="text-caramel-400 group-hover:text-caramel-300 transition-colors">
               <CupIcon className="w-9 h-9" strokeWidth={1.5} />
             </span>
             <span className="text-left leading-none">
               <span className="block font-display text-xl font-semibold tracking-tight text-cream-100">
-                Ember <span className="text-caramel-400">&amp;</span> Oak
+                Уголёк <span className="text-caramel-400">и</span> Дуб
               </span>
               <span className="block font-mono text-[9px] tracking-[0.34em] text-faint mt-1">
-                ROASTING CO.
+                ОБЖАРКА КОФЕ
               </span>
             </span>
           </button>
@@ -62,11 +63,11 @@ export default function Header({ cartCount, onCartOpen, onNavigate }: HeaderProp
             <button
               onClick={onCartOpen}
               className="relative flex items-center gap-2.5 border border-line bg-bark-800 hover:border-caramel-500 hover:bg-bark-700 rounded-full pl-4 pr-4 py-2.5 transition-all active:scale-95"
-              aria-label={`Open cart, ${cartCount} items`}
+              aria-label={`Открыть корзину, ${cartCount} ${pluralRu(cartCount, "товар", "товара", "товаров")}`}
             >
               <BagIcon className="w-[18px] h-[18px] text-cream-100" />
               <span className="hidden sm:inline text-sm font-semibold text-cream-100">
-                Bag
+                Корзина
               </span>
               {cartCount > 0 && (
                 <span
@@ -82,7 +83,7 @@ export default function Header({ cartCount, onCartOpen, onNavigate }: HeaderProp
             <button
               onClick={() => setMenuOpen((v) => !v)}
               className="md:hidden flex flex-col items-center justify-center gap-[5px] w-10 h-10 border border-line rounded-full bg-bark-800 hover:border-caramel-500 transition-colors"
-              aria-label="Toggle menu"
+              aria-label="Открыть меню"
               aria-expanded={menuOpen}
             >
               {menuOpen ? (

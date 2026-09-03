@@ -22,7 +22,7 @@ export default function ProductCard({ product, index, onOpen, onAdd }: ProductCa
         <div className="relative overflow-hidden aspect-[4/4.4]">
           <img
             src={product.image}
-            alt={`${product.name} — ${product.weight} coffee bag`}
+            alt={`«${product.name}» — пакет кофе ${product.weight}`}
             loading="lazy"
             className="h-full w-full object-cover object-[50%_20%] transition-transform duration-700 ease-out group-hover:scale-[1.06]"
           />
@@ -33,7 +33,7 @@ export default function ProductCard({ product, index, onOpen, onAdd }: ProductCa
             {product.code}
           </span>
           <span className="absolute top-3 right-3 font-mono text-[10px] font-semibold bg-caramel-400 text-bark-950 px-2 py-1 rounded-sm">
-            {product.score} PTS
+            {product.score} БАЛЛОВ
           </span>
 
           {/* quick view */}
@@ -45,7 +45,7 @@ export default function ProductCard({ product, index, onOpen, onAdd }: ProductCa
               }}
               className="w-full bg-bark-950/90 border border-line hover:border-caramel-500 rounded-md py-2.5 font-mono text-[10.5px] uppercase tracking-[0.26em] text-cream-100 transition-colors"
             >
-              Quick view
+              Быстрый просмотр
             </button>
           </div>
         </div>
@@ -88,11 +88,11 @@ export default function ProductCard({ product, index, onOpen, onAdd }: ProductCa
                 onAdd(product);
               }}
               className="group/add flex items-center bg-caramel-400 hover:bg-caramel-300 text-bark-950 rounded-full pl-3 pr-3 py-2.5 transition-all duration-200 active:scale-90 shadow-[0_8px_20px_-10px_rgba(209,143,63,0.7)]"
-              aria-label={`Add ${product.name} to bag`}
+              aria-label={`Добавить «${product.name}» в корзину`}
             >
               <PlusIcon className="w-4 h-4" strokeWidth={2.4} />
-              <span className="max-w-0 overflow-hidden whitespace-nowrap transition-all duration-300 group-hover/add:max-w-[3.2rem] group-hover/add:ml-1.5 text-sm font-bold">
-                Add
+              <span className="max-w-0 overflow-hidden whitespace-nowrap transition-all duration-300 group-hover/add:max-w-[5.5rem] group-hover/add:ml-1.5 text-sm font-bold">
+                В корзину
               </span>
             </button>
           </div>

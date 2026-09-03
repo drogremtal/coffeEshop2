@@ -105,8 +105,8 @@ export default function App() {
       });
       showToast(
         qty > 1
-          ? `${product.name} ×${qty} added to your bag`
-          : `${product.name} added to your bag`
+          ? `«${product.name}» ×${qty} — в корзине`
+          : `«${product.name}» — в корзине`
       );
       setActive(null);
       if (openDrawer) setCartOpen(true);
@@ -126,7 +126,7 @@ export default function App() {
     (id: string) => {
       setCart((prev) => prev.filter((l) => l.id !== id));
       const p = PRODUCTS.find((x) => x.id === id);
-      if (p) showToast(`${p.name} removed from your bag`);
+      if (p) showToast(`«${p.name}» — убран из корзины`);
     },
     [showToast]
   );

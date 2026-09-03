@@ -4,52 +4,52 @@ import { FlameIcon, LeafIcon, TruckIcon } from "./icons";
 
 const LEVELS = [
   {
-    name: "Light",
+    name: "Светлая",
     color: "#d9b183",
     blurb:
-      "Dropped shortly after first crack. Maximum origin character — florals, citrus, tea-like clarity. Our Dawn Patrol lives here.",
+      "Выгружаем сразу после первого крэка. Максимум характера происхождения: цветы, цитрус, чайная прозрачность. Здесь живёт «Утренний дозор».",
   },
   {
-    name: "Medium-light",
+    name: "Средне-светлая",
     color: "#c1955f",
     blurb:
-      "A few seconds further in. Acidity softens into stone-fruit sweetness and the body rounds out. Cloud Forest territory.",
+      "Ещё несколько секунд в барабане. Кислотность смягчается в сладость косточковых, тело округляется. Территория «Облачного леса».",
   },
   {
-    name: "Medium",
+    name: "Средняя",
     color: "#9c6f42",
     blurb:
-      "The balance point — caramelized sugars, gentle acidity, a cup that works black or with a splash of milk. Velvet Hour, Ember Decaf.",
+      "Точка равновесия: карамелизованные сахара, деликатная кислотность, чашка, которой хорошо и чёрной, и с молоком. «Бархатный час» и «Уголёк».",
   },
   {
-    name: "Medium-dark",
+    name: "Средне-тёмная",
     color: "#6e4a2c",
     blurb:
-      "Into the second-crack approach. Bittersweet cocoa, toasted nuts, syrupy weight. Where the Hearth Blend settles.",
+      "На подходе ко второму крэку. Горьковатое какао, жареный орех, сиропная плотность. Здесь оседает купаж «Очаг».",
   },
   {
-    name: "Dark",
+    name: "Тёмная",
     color: "#3a2417",
     blurb:
-      "Riding the edge of second crack — never past it. Smoke-free, molasses-deep, built to cut through steamed milk. Night Shift.",
+      "По самой грани второго крэка — и никогда дальше. Без дыма, с глубиной патоки; создана прорезать молоко. «Ночная смена».",
   },
 ];
 
 const PROMISES = [
   {
     icon: <TruckIcon className="w-5 h-5" />,
-    title: "Roasted to order",
-    copy: "Your bag hits the drum after you click, never before. Ships within 48 hours.",
+    title: "Обжарка под заказ",
+    copy: "Ваш пакет попадает в барабан после клика, а не до. Отправляем в течение 48 часов.",
   },
   {
     icon: <FlameIcon className="w-5 h-5" />,
-    title: "Profiled by hand",
-    copy: "Every lot gets its own roast curve, cupped three times before it earns a label.",
+    title: "Профили вручную",
+    copy: "Каждому лоту — своя кривая обжарки и три каппинга до того, как на пакет ляжет этикетка.",
   },
   {
     icon: <LeafIcon className="w-5 h-5" />,
-    title: "Paid at origin",
-    copy: "We buy direct from 26 farm partners at an average of 2.4× the commodity price.",
+    title: "Прямая оплата фермерам",
+    copy: "Покупаем напрямую у 26 ферм-партнёров — в среднем в 2,4 раза выше биржевой цены.",
   },
 ];
 
@@ -65,15 +65,15 @@ export default function RoastScale() {
         <div ref={headRef} className="reveal max-w-2xl">
           <p className="flex items-center gap-4 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.32em] text-caramel-400">
             <span className="h-px w-10 bg-caramel-500/70" />
-            The roast scale
+            Шкала обжарки
           </p>
           <h2 className="mt-4 font-display font-semibold text-4xl sm:text-5xl tracking-[-0.02em] text-cream-100">
-            From <em className="italic font-light text-caramel-400">blonde</em> to{" "}
-            <em className="italic font-light text-cream-300">blackstrap</em>.
+            От <em className="italic font-light text-caramel-400">блонда</em> до{" "}
+            <em className="italic font-light text-cream-300">угольного</em>.
           </h2>
           <p className="mt-4 text-[15px] leading-relaxed text-cream-300">
-            We roast across five stops and label every bag honestly. Hover the scale
-            to see where each coffee lands — and what to expect in the cup.
+            Обжариваем в пяти точках шкалы и честно пишем об этом на каждом пакете.
+            Наведите курсор — увидите, где живёт каждый лот и чего ждать в чашке.
           </p>
         </div>
 
@@ -95,7 +95,7 @@ export default function RoastScale() {
                   onFocus={() => setActive(i)}
                   onClick={() => setActive(i)}
                   className="group relative flex-1 outline-none"
-                  aria-label={`${l.name} roast`}
+                  aria-label={`Обжарка: ${l.name.toLowerCase()}`}
                 >
                   <span
                     className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 transition-all duration-300 ${
@@ -106,7 +106,7 @@ export default function RoastScale() {
                     style={active === i ? { backgroundColor: l.color } : undefined}
                   />
                   <span
-                    className={`absolute left-1/2 -translate-x-1/2 bottom-1.5 font-mono text-[8.5px] sm:text-[10px] uppercase tracking-[0.18em] transition-all duration-300 ${
+                    className={`absolute left-1/2 -translate-x-1/2 bottom-1.5 font-mono text-[8px] sm:text-[10px] uppercase tracking-[0.14em] transition-all duration-300 whitespace-nowrap ${
                       active === i ? "text-cream-100 font-semibold" : "text-bark-950/70"
                     }`}
                     style={{ textShadow: "0 1px 4px rgba(0,0,0,0.4)" }}
@@ -125,7 +125,7 @@ export default function RoastScale() {
             />
             <p key={active} className="rise-in text-sm sm:text-[15px] leading-relaxed text-cream-300">
               <span className="font-display font-semibold text-cream-100 text-base sm:text-lg mr-2">
-                {LEVELS[active].name} roast.
+                {LEVELS[active].name} обжарка.
               </span>
               {LEVELS[active].blurb}
             </p>
